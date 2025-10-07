@@ -40,6 +40,13 @@ int main() {
     // 5. Accept an incoming connection
     struct sockaddr_in client;
     int client_len = sizeof(client);
+    // issue is here, w/ accept function.
+    // the accept halts the program, and wait for a new connection.
+    // the while condition is only checked after the accept is done.
+    // thus, the while codition is only checked after a new connection is made.
+    //
+    // even if the kr=0, the while loop will exit only after the accept is done.
+    // and the accept will be done only after it receives a new connection.
     int client_socket = accept(server_socket, (struct sockaddr *)&client,
                                (socklen_t *)&client_len);
 
